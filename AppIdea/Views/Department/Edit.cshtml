@@ -1,0 +1,40 @@
+﻿@model AppIdea.Areas.Identity.Data.Department
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+
+<div class="container">
+    <h5 class="mt-4 mb-4 text-center">Edit Department</h5>
+
+    <form asp-controller="Department" asp-action="Edit" class="row" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-12 text-center mb-5">
+            <a asp-action="Index" class="btn btn-success">Back</a>
+            <input type="submit" value="Save" class="btn btn-primary">
+        </div>
+
+
+        <div class="col-12">
+            <div class="form-group">
+                <input asp-for="Id" class="form-control" type="hidden">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger field-validation-valid"></span>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

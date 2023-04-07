@@ -1,0 +1,65 @@
+﻿@using AppIdea.Core.ViewModel;
+@model ViewIdeaSubmit
+
+
+<div class="container">
+    <h5 class="mt-4 mb-2 text-center">Details Ideas</h5>
+
+    <div class="row text-center">
+        <div class="col-12 pl-4 pr-4 mt-5">
+            <table class="table text-left mb-4">
+                <tbody>
+                    <tr>
+                        <th>Content</th>
+                        <td>@Model.Idea.Content</td>
+                    </tr>
+                    <tr>
+                        <th>Date Created</th>
+                        <td>@Model.Idea.Datetime</td>
+                    </tr>
+
+                     <tr>
+                        <th>Category</th>
+                        <td>@Model.Idea.Categories.Name</td>
+                    </tr>                
+                </tbody>
+            </table>
+            <p>
+                @Model.Views.Count() Views
+            </p>
+
+              
+               
+            @using (Html.BeginForm("React", "Submission", new { IdIdea = Model.Idea.Id }, FormMethod.Post))
+            {
+                    <button type="submit" name="Islike" value="true" lass="btn btn-primary">
+                    @ViewBag.Like <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>Like
+                    </button>
+
+                    <button lass="btn btn-primary" type="submit" name="Islike" value="false">
+                    @ViewBag.Dislike <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i>Dislike
+                    </button>
+
+            }
+
+        </div>
+      
+    </div>
+</div>
+
+<div class="col-12 pl-4 pr-4 mt-5">
+    <form asp-controller="Submission" asp-action="Comment" class="input-group mb-3" method="post">
+        <input type="hidden" name="Id_Idea" value="@Model.Idea.Id">
+      
+        <input asp-for="@Model.Comment.Text" type="text" class="form-control" placeholder="Comment" autocomplete="text" required>
+  
+
+        <button class="btn btn-primary" type="submit"><i class="bi bi-messenger"></i> Comment</button>
+    </form>
+    @foreach(var comment in Model.Comments)
+    {
+        <div><i class="bi bi-person-circle"></i> (@comment.Datetime) - @comment.Text</div>
+    }
+   
+</div>
+

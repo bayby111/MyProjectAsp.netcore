@@ -1,0 +1,71 @@
+﻿@using AppIdea.Areas.Identity.Data;
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model X.PagedList.IPagedList<Idea>
+
+<div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+    <div class="col-md-6 px-0">
+        <h1 class="display-4 fst-italic">The List Of Idea Posted</h1>
+        <p class="lead my-3">It is challenging and irritating to think of anything unique and distinct from what the world has already experienced.</p>
+        
+    </div>
+</div>
+
+
+<div class="row mb-2">
+    @foreach(var idea in Model)
+    {
+        <div class="col-md-6">
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    @if(idea.Categories == null)
+                    {
+                        <strong class="d-inline-block mb-2 text-primary"></strong>
+                    }else{
+                        <strong class="d-inline-block mb-2 text-primary">Category: @idea.Categories.Name</strong>
+
+                    }
+                    @if(idea.Topics == null)
+                    {
+                        <h3 class="mb-0"></h3>
+                    }else{
+                        <h3 class="mb-0">Topic: @idea.Topics.Name</h3>
+
+                    }
+                    <div class="mb-1 text-muted">@idea.Datetime</div>
+                    
+                    <p class="card-text mb-auto">Content: @idea.Content</p>
+                    @if(idea.Users == null)
+                    {
+                        <p></p>
+                    }
+                    else
+                    {
+                        <p>be created by-(@idea.Users.Firstname)</p>
+                    }
+                    
+                   
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    
+                    <img src="~/Uploads/@idea.FilePath" alt="@idea.Content" class="bd-placeholder-img" width="250" height="250" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+=
+
+<div>
+    <p class="text-muted">Page</p>
+    @Html.PagedListPager(Model, page =>Url.Action("Index", "Home", new{page = page}),   new PagedListRenderOptions {
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }})
+</div>
+
+

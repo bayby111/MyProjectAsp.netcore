@@ -1,0 +1,77 @@
+﻿@using AppIdea.Areas.Identity.Data;
+@using AppIdea.Core.ViewModel;
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Topic>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h3>Staff Submission</h3>
+
+<div>
+
+    <form class="example" asp-action="Index" method="get">
+        <input type="text" placeholder="Search.." name="name">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+
+</div>
+
+
+
+<table class="table">
+        <thead>
+            <tr>
+                
+                <th>
+                    Name
+                </th>
+                <th>
+                    Deadline_1
+                </th>
+                <th>
+                    Deadline_2
+                </th>
+                <th>Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var topic in Model)
+        {
+               <tr>
+                <td>
+                    @topic.Name
+                </td>
+                <td>
+                    @topic.Deadline_1
+                </td>
+                <td>
+                    @topic.Dealine_2
+                </td>
+                <td>
+                    <a asp-controller="Submission" asp-action="ViewIdea" asp-route-IdTopic="@topic.Id" class="btn btn-info">View Ideas</a>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Manager"))
+                    {
+                         <a asp-controller="Submission" asp-action="DownloadZip" asp-route-IdTopic="@topic.Id" class="btn btn-info">Export FileZip</a>
+                         <a asp-controller="Submission" asp-action="DownloadExcel" asp-route-IdTopic="@topic.Id" class="btn btn-info">Export FileExcel</a>
+                    }
+
+                </td>
+             
+            </tr>
+            
+        }
+      
+   
+           
+        </tbody>
+    </table>
+    <div>
+    <p class="text-muted">Page</p>
+    @Html.PagedListPager(Model, page =>Url.Action("Index","Submission", new{page=page}),  new PagedListRenderOptions {
+    LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }})
+    </div>

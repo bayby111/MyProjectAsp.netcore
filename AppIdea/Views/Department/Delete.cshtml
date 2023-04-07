@@ -1,0 +1,34 @@
+﻿@model AppIdea.Areas.Identity.Data.Department
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+
+<div class="container">
+    <h5 class="mt-4 mb-2 text-center">Delete Depart</h5>
+
+    <div class="row text-center">
+        <div class="col-12 pl-4 pr-4 mt-5">
+            <table class="table text-left mb-4">
+                <tbody>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <td>@Model.Name</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h6>Are you sure you want to delete this?</h6>
+
+            <form asp-controller="Department" asp-action="Delete" method="post">
+                <input asp-for="Id" type="hidden">
+
+                <a asp-action="Index" class="btn btn-success mt-2">Back</a>
+                <input type="submit" value="Delete" class="btn btn-danger mt-2">
+
+            </form>
+        </div>
+    </div>
+</div>

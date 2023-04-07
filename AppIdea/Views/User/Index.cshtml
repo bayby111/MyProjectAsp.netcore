@@ -1,0 +1,63 @@
+﻿
+@model X.PagedList.IPagedList<AppIdea.Areas.Identity.Data.AppIdeaUser>
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<div class="text-center">
+    <h1 class="display-4"></h1>
+    <div class="text-center mt-4">
+        <a class="btn btn-success" id="register" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person-add"></i> Add New User</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Department</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var user in Model)
+            {
+                    <tr>
+                    <th scope="row">@user.Id</th>
+                    <td>@user.Firstname</td>
+                    <td>@user.Email</td>
+                        @if (user.Departments == null)
+                        {
+                        <td></td>
+                    }
+                    else
+                    {
+                       <td>@user.Departments.Name</td>
+                    }
+
+
+                    <td>
+                        <a asp-controller="User" asp-action="Delete" asp-route-id="@user.Id" class="btn btn-danger btn-sm rounded-0"><i class="bi bi-trash3-fill"> </i>Delete</a> ||
+                        <a asp-controller="User" asp-action="Edit" asp-route-id="@user.Id" class="btn btn-warning btn-sm rounded-0"><i class="bi bi-pencil-fill"></i> Edit</a>
+                       
+                    </td>
+                    </tr>
+                
+            }
+           
+          
+        </tbody>
+    </table>
+
+
+</div>
+<div>
+    <p class="text-muted">Page</p>
+    @Html.PagedListPager(Model, page=>Url.Action("Index", "User", new{page =page}),  new PagedListRenderOptions {
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }})
+</div>

@@ -1,0 +1,54 @@
+﻿@model AppIdea.Areas.Identity.Data.Idea
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+
+<div class="container">
+    <h5 class="mt-4 mb-4 text-center">Create New Idea</h5>
+
+    <form asp-controller="Idea" asp-action="Create" class="row" method="post" enctype="multipart/form-data">
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-12 text-center mb-5">
+            <a asp-controller="Idea" asp-action="Index" class="btn btn-success">Back</a>
+            <input type="submit" value="Create" class="btn btn-primary">
+        </div>
+
+        <div class="col-12">
+
+            <div class="form-group">
+                <label asp-for="Content" class="control-label" for="Name">Content</label>
+                <input asp-for="Content" class="form-control" type="text" value="">
+                <span asp-validation-for="Content" class="text-danger field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FilePath" class="control-label" for="Name">Name</label>
+                <input asp-for="FilePath" class="form-control" type="file" name="colectfile">
+                <span asp-validation-for="FilePath" class="text-danger field-validation-valid" data-valmsg-for="FilePath" data-valmsg-replace="true"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label" for="Name">categories</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="@Model.CateNameSL">
+                    <option selected disabled>---Choice category---</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger field-validation-valid" data-valmsg-for="dateime" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TopicId" class="control-label" for="Name">Topics</label>
+                <select asp-for="TopicId" class="form-control" asp-items="@Model.TopicNameSL">
+                    <option selected disabled>---Choice a Topic---</option>
+                </select>
+                <span asp-validation-for="TopicId" class="text-danger field-validation-valid" data-valmsg-for="dateime" data-valmsg-replace="true"></span>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

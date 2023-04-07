@@ -1,0 +1,45 @@
+﻿@model AppIdea.Areas.Identity.Data.Topic
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+
+<div class="container">
+    <h5 class="mt-4 mb-4 text-center">Create Topic</h5>
+
+    <form asp-controller="Topic" asp-action="Create" class="row" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-12 text-center mb-5">
+            <a asp-controller="Topic" asp-action="Index" class="btn btn-success">Back</a>
+            <input type="submit" value="Create" class="btn btn-primary">
+        </div>
+
+        <div class="col-12">
+          
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label" for="Name">Name</label>
+                <input asp-for="Name" class="form-control" type="text" id="Name" name="Name" value="">
+                <span asp-validation-for="Name" class="text-danger field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Deadline_1" class="control-label">Deadline 1</label>
+                <input asp-for="Deadline_1" class="form-control">
+                <span asp-validation-for="Deadline_1" class="text-danger field-validation-valid"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Dealine_2" class="control-label">Deadline 2</label>
+                <input asp-for="Dealine_2" class="form-control">
+                <span asp-validation-for="Dealine_2" class="text-danger field-validation-valid"></span>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

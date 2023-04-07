@@ -1,0 +1,71 @@
+﻿@using AppIdea.Core.ViewModel;
+@using X.PagedList.Mvc.Core
+@{
+    ViewData["Title"] = "ViewIdea";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ViewIdeaSubmit
+
+
+    <h1>List of Ideas</h1>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+               Name
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Topic.Name
+            </dd>
+            <dt class="col-sm-2">
+                Deadline_1
+            </dt>
+            <dd class="col-sm-10">
+               @Model.Topic.Deadline_1
+            </dd>
+            <dt class="col-sm-2">
+                Deadline_2
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Topic.Dealine_2
+            </dd>
+        </dl>
+    </div>
+
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Content</th>
+                <th>Date Created</th>               
+                <th>Handle</th>
+            </tr>
+        @foreach (var idea in Model.Ideas)
+        {
+            <tr>
+                
+                <td>@idea.Content</td>
+                <td>@idea.Datetime</td>
+                
+               
+               <td>
+                    <a asp-action="AddView" asp-route-IdIdea="@idea.Id"  class="btn btn-primary"><i class="bi bi-eye"></i>Details</a>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+
+    <div>
+        <a href="/Submission">Back to List</a>
+    </div>
+    <div>
+    <p class="text-muted">Page</p>
+    @Html.PagedListPager(Model.Ideas, page =>Url.Action("ViewIdea","Submmission", new{page =page}),   new PagedListRenderOptions {
+    LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }})
+    </div>
+
+
+
+

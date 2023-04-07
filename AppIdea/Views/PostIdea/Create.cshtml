@@ -1,0 +1,45 @@
+﻿@using AppIdea.Areas.Identity.Data;
+@model Idea
+<div class="container mt-3">
+    <h5 class="mt-4 mb-4 text-center">Create New Idea</h5>
+
+    <form asp-controller="PostIdea" asp-action="Create" class="row" method="post" enctype="multipart/form-data">
+
+        <div class="col-12 text-center mb-5">
+           
+            <input type="submit" value="Create" class="btn btn-success">
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label asp-for="TopicId" class="control-label" for="Name">Topics</label>
+                <select asp-for="TopicId" asp-items="@Model.TopicNameSL" class="form-control">
+                    <option selected disabled>---Choice a Topic---</option>
+                </select>
+                <span asp-validation-for="TopicId" class="text-danger field-validation-valid" data-valmsg-for="dateime" data-valmsg-replace="true"></span>
+            </div>
+            <div class="col">
+                 <label asp-for="CategoryId" class="control-label" for="Name">categories</label>
+                <select asp-for="CategoryId" asp-items="@Model.CateNameSL" class="form-control" >
+                    <option selected disabled>---Choice category---</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger field-validation-valid" data-valmsg-for="dateime" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <label asp-for="FilePath" class="control-label"></label>
+            <input asp-for="FilePath" class="form-control" type="file" name="colectfile" required>
+            <span asp-validation-for="FilePath" class="text-danger field-validation-valid" data-valmsg-for="FilePath" data-valmsg-replace="true"></span>
+        </div>
+    
+    <div class="mb-3 mt-3">
+        <label asp-for="Content">Content:</label>
+        <textarea asp-for="Content" class="form-control" rows="5" required></textarea>
+    </div>
+       
+</form>
+
+
+</div>
+

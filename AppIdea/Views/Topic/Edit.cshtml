@@ -1,0 +1,55 @@
+﻿@model AppIdea.Areas.Identity.Data.Topic
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+
+<div class="container">
+    <h5 class="mt-4 mb-4 text-center">Edit Topic</h5>
+
+    <form asp-controller="Topic" asp-action="Edit" class="row" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-12 text-center mb-5">
+            <a asp-action="Index" class="btn btn-success">Back</a>
+            <input type="submit" value="Save" class="btn btn-primary">
+        </div>
+
+
+        <div class="col-12">
+            <div class="form-group">
+                <input asp-for="Id" class="form-control" type="hidden">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Name</label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger field-validation-valid"></span>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Deadline_1" class="control-label">Dealine 1</label>
+                <input asp-for="Deadline_1" class="form-control">
+                <span asp-validation-for="Deadline_1" class="text-danger field-validation-valid"></span>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Dealine_2" class="control-label">Dealine 2</label>
+                <input asp-for="Dealine_2" class="form-control">
+                <span asp-validation-for="Dealine_2" class="text-danger field-validation-valid"></span>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

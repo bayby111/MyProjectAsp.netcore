@@ -1,0 +1,45 @@
+﻿@model X.PagedList.IPagedList<AppIdea.Areas.Identity.Data.Department>
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+
+
+    <div class="text-center mt-4">
+        <a asp-controller="Department" asp-action="Create" class="btn btn-success">Create New Department</a>
+    </div>
+
+    <table class="table text-center">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Handle</th>
+            </tr>
+
+            @foreach (var Dept in Model)
+            {
+                <tr>
+                    <td>@Dept.Id</td>
+                    <td>@Dept.Name</td>
+                    <td>
+                    <a asp-controller="Department" asp-action="Delete" asp-route-id="@Dept.Id" class="btn btn-danger btn-sm rounded-0"><i class="bi bi-trash3-fill"></i> Delete</a> ||
+                    <a asp-controller="Department" asp-action="Edit" asp-route-id="@Dept.Id" class="btn btn-warning btn-sm rounded-0"><i class="bi bi-pencil-fill"></i> Edit</a>||
+                    <a asp-controller="Department" asp-action="Details" asp-route-id="@Dept.Id" class="btn btn-info btn-sm rounded-0"><i class="bi bi-eye-fill"></i> View</a>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+    <div>
+    <p class="text-muted">Page</p>
+    @Html.PagedListPager(Model, page =>Url.Action("Index", "Department", new{page = page}),  new PagedListRenderOptions {
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }})
+    </div>
+
